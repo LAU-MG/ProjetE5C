@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LM_GsbE5CsharpModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="composant">
+          <Key>
+            <PropertyRef Name="id_composant" />
+          </Key>
+          <Property Name="id_composant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lib_composant" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="constituer">
+          <Key>
+            <PropertyRef Name="id_composant" />
+            <PropertyRef Name="id_medicament" />
+          </Key>
+          <Property Name="id_composant" Type="int" Nullable="false" />
+          <Property Name="id_medicament" Type="int" Nullable="false" />
+          <Property Name="qte_composant" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <EntityType Name="famille">
+          <Key>
+            <PropertyRef Name="id_famille" />
+          </Key>
+          <Property Name="id_famille" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lib_famille" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="medicament">
+          <Key>
+            <PropertyRef Name="id_medicament" />
+          </Key>
+          <Property Name="id_medicament" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_famille" Type="int" />
+          <Property Name="depot_legal" Type="varchar" MaxLength="100" />
+          <Property Name="nom_commercial" Type="varchar" MaxLength="100" />
+          <Property Name="effets" Type="varchar" MaxLength="512" />
+          <Property Name="contre_indication" Type="char" MaxLength="255" />
+          <Property Name="prix_echantillon" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <EntityType Name="offrir">
+          <Key>
+            <PropertyRef Name="id_medicament" />
+            <PropertyRef Name="id_rapport" />
+            <PropertyRef Name="id_visiteur" />
+          </Key>
+          <Property Name="id_medicament" Type="int" Nullable="false" />
+          <Property Name="id_rapport" Type="int" Nullable="false" />
+          <Property Name="id_visiteur" Type="int" Nullable="false" />
+          <Property Name="qte_offerte" Type="int" />
+        </EntityType>
+        <EntityType Name="praticien">
+          <Key>
+            <PropertyRef Name="id_praticien" />
+          </Key>
+          <Property Name="id_praticien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_type_praticien" Type="int" />
+          <Property Name="nom_praticien" Type="varchar" MaxLength="100" />
+          <Property Name="prenom_praticien" Type="varchar" MaxLength="100" />
+          <Property Name="adresse_praticien" Type="varchar" MaxLength="200" />
+          <Property Name="cp_praticien" Type="char" MaxLength="5" />
+          <Property Name="ville_praticien" Type="varchar" MaxLength="100" />
+          <Property Name="coef_notoriete" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <EntityType Name="rapport_visite">
+          <Key>
+            <PropertyRef Name="id_rapport" />
+          </Key>
+          <Property Name="id_rapport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_praticien" Type="int" />
+          <Property Name="id_visiteur" Type="int" Nullable="false" />
+          <Property Name="date_rapport" Type="date" />
+          <Property Name="bilan" Type="varchar" MaxLength="512" />
+          <Property Name="motif" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="type_praticien">
+          <Key>
+            <PropertyRef Name="id_type_praticien" />
+          </Key>
+          <Property Name="id_type_praticien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lib_type_praticien" Type="varchar" MaxLength="100" />
+          <Property Name="lieu_type_praticien" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="visiteur">
+          <Key>
+            <PropertyRef Name="id_visiteur" />
+          </Key>
+          <Property Name="id_visiteur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_laboratoire" Type="int" />
+          <Property Name="id_secteur" Type="int" />
+          <Property Name="nom_visiteur" Type="varchar" MaxLength="100" />
+          <Property Name="prenom_visiteur" Type="varchar" MaxLength="100" />
+          <Property Name="adresse_visiteur" Type="varchar" MaxLength="200" />
+          <Property Name="cp_visiteur" Type="char" MaxLength="5" />
+          <Property Name="ville_visiteur" Type="varchar" MaxLength="100" />
+          <Property Name="date_embauche" Type="date" />
+          <Property Name="login_visiteur" Type="varchar" MaxLength="50" />
+          <Property Name="pwd_visiteur" Type="varchar" MaxLength="200" />
+          <Property Name="type_visiteur" Type="char" MaxLength="1" />
+          <Property Name="sel_visiteur" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="fk_constituer_composant">
+          <End Role="composant" Type="Self.composant" Multiplicity="1" />
+          <End Role="constituer" Type="Self.constituer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="composant">
+              <PropertyRef Name="id_composant" />
+            </Principal>
+            <Dependent Role="constituer">
+              <PropertyRef Name="id_composant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_constituer_medicament">
+          <End Role="medicament" Type="Self.medicament" Multiplicity="1" />
+          <End Role="constituer" Type="Self.constituer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicament">
+              <PropertyRef Name="id_medicament" />
+            </Principal>
+            <Dependent Role="constituer">
+              <PropertyRef Name="id_medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medicament_famille">
+          <End Role="famille" Type="Self.famille" Multiplicity="0..1" />
+          <End Role="medicament" Type="Self.medicament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="famille">
+              <PropertyRef Name="id_famille" />
+            </Principal>
+            <Dependent Role="medicament">
+              <PropertyRef Name="id_famille" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_offrir_medicament">
+          <End Role="medicament" Type="Self.medicament" Multiplicity="1" />
+          <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicament">
+              <PropertyRef Name="id_medicament" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="id_medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_offrir_rapport_visite">
+          <End Role="rapport_visite" Type="Self.rapport_visite" Multiplicity="1" />
+          <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rapport_visite">
+              <PropertyRef Name="id_rapport" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="id_rapport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_praticien_type_praticien">
+          <End Role="type_praticien" Type="Self.type_praticien" Multiplicity="0..1" />
+          <End Role="praticien" Type="Self.praticien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_praticien">
+              <PropertyRef Name="id_type_praticien" />
+            </Principal>
+            <Dependent Role="praticien">
+              <PropertyRef Name="id_type_praticien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rapport_visite_praticien">
+          <End Role="praticien" Type="Self.praticien" Multiplicity="0..1" />
+          <End Role="rapport_visite" Type="Self.rapport_visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="praticien">
+              <PropertyRef Name="id_praticien" />
+            </Principal>
+            <Dependent Role="rapport_visite">
+              <PropertyRef Name="id_praticien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rapport_visite_visiteur">
+          <End Role="visiteur" Type="Self.visiteur" Multiplicity="1" />
+          <End Role="rapport_visite" Type="Self.rapport_visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="visiteur">
+              <PropertyRef Name="id_visiteur" />
+            </Principal>
+            <Dependent Role="rapport_visite">
+              <PropertyRef Name="id_visiteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LM_GsbE5CsharpModelStoreContainer">
+          <EntitySet Name="composant" EntityType="Self.composant" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="constituer" EntityType="Self.constituer" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="famille" EntityType="Self.famille" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="medicament" EntityType="Self.medicament" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="offrir" EntityType="Self.offrir" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="praticien" EntityType="Self.praticien" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="rapport_visite" EntityType="Self.rapport_visite" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="type_praticien" EntityType="Self.type_praticien" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <EntitySet Name="visiteur" EntityType="Self.visiteur" Schema="LM_GsbE5Csharp" store:Type="Tables" />
+          <AssociationSet Name="fk_constituer_composant" Association="Self.fk_constituer_composant">
+            <End Role="composant" EntitySet="composant" />
+            <End Role="constituer" EntitySet="constituer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_constituer_medicament" Association="Self.fk_constituer_medicament">
+            <End Role="medicament" EntitySet="medicament" />
+            <End Role="constituer" EntitySet="constituer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medicament_famille" Association="Self.fk_medicament_famille">
+            <End Role="famille" EntitySet="famille" />
+            <End Role="medicament" EntitySet="medicament" />
+          </AssociationSet>
+          <AssociationSet Name="fk_offrir_medicament" Association="Self.fk_offrir_medicament">
+            <End Role="medicament" EntitySet="medicament" />
+            <End Role="offrir" EntitySet="offrir" />
+          </AssociationSet>
+          <AssociationSet Name="fk_offrir_rapport_visite" Association="Self.fk_offrir_rapport_visite">
+            <End Role="rapport_visite" EntitySet="rapport_visite" />
+            <End Role="offrir" EntitySet="offrir" />
+          </AssociationSet>
+          <AssociationSet Name="fk_praticien_type_praticien" Association="Self.fk_praticien_type_praticien">
+            <End Role="type_praticien" EntitySet="type_praticien" />
+            <End Role="praticien" EntitySet="praticien" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rapport_visite_praticien" Association="Self.fk_rapport_visite_praticien">
+            <End Role="praticien" EntitySet="praticien" />
+            <End Role="rapport_visite" EntitySet="rapport_visite" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rapport_visite_visiteur" Association="Self.fk_rapport_visite_visiteur">
+            <End Role="visiteur" EntitySet="visiteur" />
+            <End Role="rapport_visite" EntitySet="rapport_visite" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LM_GsbE5CsharpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="composant">
+          <Key>
+            <PropertyRef Name="id_composant" />
+          </Key>
+          <Property Name="id_composant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lib_composant" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="constituer" Relationship="Self.fk_constituer_composant" FromRole="composant" ToRole="constituer" />
+        </EntityType>
+        <EntityType Name="constituer">
+          <Key>
+            <PropertyRef Name="id_composant" />
+            <PropertyRef Name="id_medicament" />
+          </Key>
+          <Property Name="id_composant" Type="Int32" Nullable="false" />
+          <Property Name="id_medicament" Type="Int32" Nullable="false" />
+          <Property Name="qte_composant" Type="Decimal" />
+          <NavigationProperty Name="composant" Relationship="Self.fk_constituer_composant" FromRole="constituer" ToRole="composant" />
+          <NavigationProperty Name="medicament" Relationship="Self.fk_constituer_medicament" FromRole="constituer" ToRole="medicament" />
+        </EntityType>
+        <EntityType Name="famille">
+          <Key>
+            <PropertyRef Name="id_famille" />
+          </Key>
+          <Property Name="id_famille" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lib_famille" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="medicament" Relationship="Self.fk_medicament_famille" FromRole="famille" ToRole="medicament" />
+        </EntityType>
+        <EntityType Name="medicament">
+          <Key>
+            <PropertyRef Name="id_medicament" />
+          </Key>
+          <Property Name="id_medicament" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_famille" Type="Int32" />
+          <Property Name="depot_legal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_commercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="effets" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="contre_indication" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prix_echantillon" Type="Decimal" />
+          <NavigationProperty Name="constituer" Relationship="Self.fk_constituer_medicament" FromRole="medicament" ToRole="constituer" />
+          <NavigationProperty Name="famille" Relationship="Self.fk_medicament_famille" FromRole="medicament" ToRole="famille" />
+          <NavigationProperty Name="offrir" Relationship="Self.fk_offrir_medicament" FromRole="medicament" ToRole="offrir" />
+        </EntityType>
+        <EntityType Name="offrir">
+          <Key>
+            <PropertyRef Name="id_medicament" />
+            <PropertyRef Name="id_rapport" />
+            <PropertyRef Name="id_visiteur" />
+          </Key>
+          <Property Name="id_medicament" Type="Int32" Nullable="false" />
+          <Property Name="id_rapport" Type="Int32" Nullable="false" />
+          <Property Name="id_visiteur" Type="Int32" Nullable="false" />
+          <Property Name="qte_offerte" Type="Int32" />
+          <NavigationProperty Name="medicament" Relationship="Self.fk_offrir_medicament" FromRole="offrir" ToRole="medicament" />
+          <NavigationProperty Name="rapport_visite" Relationship="Self.fk_offrir_rapport_visite" FromRole="offrir" ToRole="rapport_visite" />
+        </EntityType>
+        <EntityType Name="praticien">
+          <Key>
+            <PropertyRef Name="id_praticien" />
+          </Key>
+          <Property Name="id_praticien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_type_praticien" Type="Int32" />
+          <Property Name="nom_praticien" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="prenom_praticien" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="adresse_praticien" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cp_praticien" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ville_praticien" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="coef_notoriete" Type="Decimal" />
+          <NavigationProperty Name="type_praticien" Relationship="Self.fk_praticien_type_praticien" FromRole="praticien" ToRole="type_praticien" />
+          <NavigationProperty Name="rapport_visite" Relationship="Self.fk_rapport_visite_praticien" FromRole="praticien" ToRole="rapport_visite" />
+        </EntityType>
+        <EntityType Name="rapport_visite">
+          <Key>
+            <PropertyRef Name="id_rapport" />
+          </Key>
+          <Property Name="id_rapport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_praticien" Type="Int32" />
+          <Property Name="id_visiteur" Type="Int32" Nullable="false" />
+          <Property Name="date_rapport" Type="DateTime" />
+          <Property Name="bilan" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="motif" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="offrir" Relationship="Self.fk_offrir_rapport_visite" FromRole="rapport_visite" ToRole="offrir" />
+          <NavigationProperty Name="praticien" Relationship="Self.fk_rapport_visite_praticien" FromRole="rapport_visite" ToRole="praticien" />
+          <NavigationProperty Name="visiteur" Relationship="Self.fk_rapport_visite_visiteur" FromRole="rapport_visite" ToRole="visiteur" />
+        </EntityType>
+        <EntityType Name="type_praticien">
+          <Key>
+            <PropertyRef Name="id_type_praticien" />
+          </Key>
+          <Property Name="id_type_praticien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lib_type_praticien" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lieu_type_praticien" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="praticien" Relationship="Self.fk_praticien_type_praticien" FromRole="type_praticien" ToRole="praticien" />
+        </EntityType>
+        <EntityType Name="visiteur">
+          <Key>
+            <PropertyRef Name="id_visiteur" />
+          </Key>
+          <Property Name="id_visiteur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_laboratoire" Type="Int32" />
+          <Property Name="id_secteur" Type="Int32" />
+          <Property Name="nom_visiteur" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="prenom_visiteur" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="adresse_visiteur" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cp_visiteur" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ville_visiteur" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="date_embauche" Type="DateTime" />
+          <Property Name="login_visiteur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pwd_visiteur" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="type_visiteur" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="sel_visiteur" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rapport_visite" Relationship="Self.fk_rapport_visite_visiteur" FromRole="visiteur" ToRole="rapport_visite" />
+        </EntityType>
+        <Association Name="fk_constituer_composant">
+          <End Role="composant" Type="Self.composant" Multiplicity="1" />
+          <End Role="constituer" Type="Self.constituer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="composant">
+              <PropertyRef Name="id_composant" />
+            </Principal>
+            <Dependent Role="constituer">
+              <PropertyRef Name="id_composant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_constituer_medicament">
+          <End Role="medicament" Type="Self.medicament" Multiplicity="1" />
+          <End Role="constituer" Type="Self.constituer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicament">
+              <PropertyRef Name="id_medicament" />
+            </Principal>
+            <Dependent Role="constituer">
+              <PropertyRef Name="id_medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medicament_famille">
+          <End Role="famille" Type="Self.famille" Multiplicity="0..1" />
+          <End Role="medicament" Type="Self.medicament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="famille">
+              <PropertyRef Name="id_famille" />
+            </Principal>
+            <Dependent Role="medicament">
+              <PropertyRef Name="id_famille" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_offrir_medicament">
+          <End Role="medicament" Type="Self.medicament" Multiplicity="1" />
+          <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicament">
+              <PropertyRef Name="id_medicament" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="id_medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_offrir_rapport_visite">
+          <End Role="rapport_visite" Type="Self.rapport_visite" Multiplicity="1" />
+          <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rapport_visite">
+              <PropertyRef Name="id_rapport" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="id_rapport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_praticien_type_praticien">
+          <End Role="type_praticien" Type="Self.type_praticien" Multiplicity="0..1" />
+          <End Role="praticien" Type="Self.praticien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_praticien">
+              <PropertyRef Name="id_type_praticien" />
+            </Principal>
+            <Dependent Role="praticien">
+              <PropertyRef Name="id_type_praticien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rapport_visite_praticien">
+          <End Role="praticien" Type="Self.praticien" Multiplicity="0..1" />
+          <End Role="rapport_visite" Type="Self.rapport_visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="praticien">
+              <PropertyRef Name="id_praticien" />
+            </Principal>
+            <Dependent Role="rapport_visite">
+              <PropertyRef Name="id_praticien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rapport_visite_visiteur">
+          <End Role="visiteur" Type="Self.visiteur" Multiplicity="1" />
+          <End Role="rapport_visite" Type="Self.rapport_visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="visiteur">
+              <PropertyRef Name="id_visiteur" />
+            </Principal>
+            <Dependent Role="rapport_visite">
+              <PropertyRef Name="id_visiteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LM_GsbE5CsharpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="composant" EntityType="Self.composant" />
+          <EntitySet Name="constituer" EntityType="Self.constituer" />
+          <EntitySet Name="famille" EntityType="Self.famille" />
+          <EntitySet Name="medicament" EntityType="Self.medicament" />
+          <EntitySet Name="offrir" EntityType="Self.offrir" />
+          <EntitySet Name="praticien" EntityType="Self.praticien" />
+          <EntitySet Name="rapport_visite" EntityType="Self.rapport_visite" />
+          <EntitySet Name="type_praticien" EntityType="Self.type_praticien" />
+          <EntitySet Name="visiteur" EntityType="Self.visiteur" />
+          <AssociationSet Name="fk_constituer_composant" Association="Self.fk_constituer_composant">
+            <End Role="composant" EntitySet="composant" />
+            <End Role="constituer" EntitySet="constituer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_constituer_medicament" Association="Self.fk_constituer_medicament">
+            <End Role="medicament" EntitySet="medicament" />
+            <End Role="constituer" EntitySet="constituer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medicament_famille" Association="Self.fk_medicament_famille">
+            <End Role="famille" EntitySet="famille" />
+            <End Role="medicament" EntitySet="medicament" />
+          </AssociationSet>
+          <AssociationSet Name="fk_offrir_medicament" Association="Self.fk_offrir_medicament">
+            <End Role="medicament" EntitySet="medicament" />
+            <End Role="offrir" EntitySet="offrir" />
+          </AssociationSet>
+          <AssociationSet Name="fk_offrir_rapport_visite" Association="Self.fk_offrir_rapport_visite">
+            <End Role="rapport_visite" EntitySet="rapport_visite" />
+            <End Role="offrir" EntitySet="offrir" />
+          </AssociationSet>
+          <AssociationSet Name="fk_praticien_type_praticien" Association="Self.fk_praticien_type_praticien">
+            <End Role="type_praticien" EntitySet="type_praticien" />
+            <End Role="praticien" EntitySet="praticien" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rapport_visite_praticien" Association="Self.fk_rapport_visite_praticien">
+            <End Role="praticien" EntitySet="praticien" />
+            <End Role="rapport_visite" EntitySet="rapport_visite" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rapport_visite_visiteur" Association="Self.fk_rapport_visite_visiteur">
+            <End Role="visiteur" EntitySet="visiteur" />
+            <End Role="rapport_visite" EntitySet="rapport_visite" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LM_GsbE5CsharpModelStoreContainer" CdmEntityContainer="LM_GsbE5CsharpEntities">
+          <EntitySetMapping Name="composant">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.composant">
+              <MappingFragment StoreEntitySet="composant">
+                <ScalarProperty Name="id_composant" ColumnName="id_composant" />
+                <ScalarProperty Name="lib_composant" ColumnName="lib_composant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="constituer">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.constituer">
+              <MappingFragment StoreEntitySet="constituer">
+                <ScalarProperty Name="id_composant" ColumnName="id_composant" />
+                <ScalarProperty Name="id_medicament" ColumnName="id_medicament" />
+                <ScalarProperty Name="qte_composant" ColumnName="qte_composant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="famille">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.famille">
+              <MappingFragment StoreEntitySet="famille">
+                <ScalarProperty Name="id_famille" ColumnName="id_famille" />
+                <ScalarProperty Name="lib_famille" ColumnName="lib_famille" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medicament">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.medicament">
+              <MappingFragment StoreEntitySet="medicament">
+                <ScalarProperty Name="id_medicament" ColumnName="id_medicament" />
+                <ScalarProperty Name="id_famille" ColumnName="id_famille" />
+                <ScalarProperty Name="depot_legal" ColumnName="depot_legal" />
+                <ScalarProperty Name="nom_commercial" ColumnName="nom_commercial" />
+                <ScalarProperty Name="effets" ColumnName="effets" />
+                <ScalarProperty Name="contre_indication" ColumnName="contre_indication" />
+                <ScalarProperty Name="prix_echantillon" ColumnName="prix_echantillon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="offrir">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.offrir">
+              <MappingFragment StoreEntitySet="offrir">
+                <ScalarProperty Name="id_medicament" ColumnName="id_medicament" />
+                <ScalarProperty Name="id_rapport" ColumnName="id_rapport" />
+                <ScalarProperty Name="id_visiteur" ColumnName="id_visiteur" />
+                <ScalarProperty Name="qte_offerte" ColumnName="qte_offerte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="praticien">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.praticien">
+              <MappingFragment StoreEntitySet="praticien">
+                <ScalarProperty Name="id_praticien" ColumnName="id_praticien" />
+                <ScalarProperty Name="id_type_praticien" ColumnName="id_type_praticien" />
+                <ScalarProperty Name="nom_praticien" ColumnName="nom_praticien" />
+                <ScalarProperty Name="prenom_praticien" ColumnName="prenom_praticien" />
+                <ScalarProperty Name="adresse_praticien" ColumnName="adresse_praticien" />
+                <ScalarProperty Name="cp_praticien" ColumnName="cp_praticien" />
+                <ScalarProperty Name="ville_praticien" ColumnName="ville_praticien" />
+                <ScalarProperty Name="coef_notoriete" ColumnName="coef_notoriete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rapport_visite">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.rapport_visite">
+              <MappingFragment StoreEntitySet="rapport_visite">
+                <ScalarProperty Name="id_rapport" ColumnName="id_rapport" />
+                <ScalarProperty Name="id_praticien" ColumnName="id_praticien" />
+                <ScalarProperty Name="id_visiteur" ColumnName="id_visiteur" />
+                <ScalarProperty Name="date_rapport" ColumnName="date_rapport" />
+                <ScalarProperty Name="bilan" ColumnName="bilan" />
+                <ScalarProperty Name="motif" ColumnName="motif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_praticien">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.type_praticien">
+              <MappingFragment StoreEntitySet="type_praticien">
+                <ScalarProperty Name="id_type_praticien" ColumnName="id_type_praticien" />
+                <ScalarProperty Name="lib_type_praticien" ColumnName="lib_type_praticien" />
+                <ScalarProperty Name="lieu_type_praticien" ColumnName="lieu_type_praticien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="visiteur">
+            <EntityTypeMapping TypeName="LM_GsbE5CsharpModel.visiteur">
+              <MappingFragment StoreEntitySet="visiteur">
+                <ScalarProperty Name="id_visiteur" ColumnName="id_visiteur" />
+                <ScalarProperty Name="id_laboratoire" ColumnName="id_laboratoire" />
+                <ScalarProperty Name="id_secteur" ColumnName="id_secteur" />
+                <ScalarProperty Name="nom_visiteur" ColumnName="nom_visiteur" />
+                <ScalarProperty Name="prenom_visiteur" ColumnName="prenom_visiteur" />
+                <ScalarProperty Name="adresse_visiteur" ColumnName="adresse_visiteur" />
+                <ScalarProperty Name="cp_visiteur" ColumnName="cp_visiteur" />
+                <ScalarProperty Name="ville_visiteur" ColumnName="ville_visiteur" />
+                <ScalarProperty Name="date_embauche" ColumnName="date_embauche" />
+                <ScalarProperty Name="login_visiteur" ColumnName="login_visiteur" />
+                <ScalarProperty Name="pwd_visiteur" ColumnName="pwd_visiteur" />
+                <ScalarProperty Name="type_visiteur" ColumnName="type_visiteur" />
+                <ScalarProperty Name="sel_visiteur" ColumnName="sel_visiteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

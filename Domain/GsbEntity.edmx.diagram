@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8823d687b89d45b9a42ffa2debd7280c" Name="Diagram1">
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.composant" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.constituer" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.famille" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.medicament" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.offrir" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.praticien" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.rapport_visite" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.type_praticien" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LM_GsbE5CsharpModel.visiteur" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_constituer_composant" ManuallyRouted="false" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_constituer_medicament" ManuallyRouted="false" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_medicament_famille" ManuallyRouted="false" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_offrir_medicament" ManuallyRouted="false" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_offrir_rapport_visite" ManuallyRouted="false" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_praticien_type_praticien" ManuallyRouted="false" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_rapport_visite_praticien" ManuallyRouted="false" />
+        <AssociationConnector Association="LM_GsbE5CsharpModel.fk_rapport_visite_visiteur" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
