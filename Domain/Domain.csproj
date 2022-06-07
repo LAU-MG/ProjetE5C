@@ -53,6 +53,9 @@
     <Compile Include="ServiceConstituer.cs" />
     <Compile Include="ServiceFamille.cs" />
     <Compile Include="ServiceMédicamentscs.cs" />
+    <Compile Include="ServiceOffert.cs" />
+    <Compile Include="ServicePraticien.cs" />
+    <Compile Include="ServiceRapport.cs" />
     <Compile Include="ServiceVisiteur.cs" />
     <Compile Include="composant.cs">
       <DependentUpon>GsbEntity.tt</DependentUpon>

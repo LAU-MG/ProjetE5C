@@ -52,6 +52,12 @@
     <Compile Include="Presentation\FAffichageCompo.Designer.cs">
       <DependentUpon>FAffichageCompo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\FAfficheCompo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\FAfficheCompo.Designer.cs">
+      <DependentUpon>FAfficheCompo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\FAjoutComposant.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,12 @@
     </Compile>
     <Compile Include="Presentation\FChoixFamille.Designer.cs">
       <DependentUpon>FChoixFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\FCompoModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\FCompoModif.Designer.cs">
+      <DependentUpon>FCompoModif.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentation\FListeMédicaments.cs">
       <SubType>Form</SubType>
@@ -88,16 +100,88 @@
     <Compile Include="Presentation\FModifCompo.Designer.cs">
       <DependentUpon>FModifCompo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\FSuppCompo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\FSuppCompo.Designer.cs">
+      <DependentUpon>FSuppCompo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FchoixMedicamentModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FchoixMedicamentModif.Designer.cs">
+      <DependentUpon>FchoixMedicamentModif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FChoixRapportModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FChoixRapportModif.Designer.cs">
+      <DependentUpon>FChoixRapportModif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FChoixVisiteurModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FChoixVisiteurModif.Designer.cs">
+      <DependentUpon>FChoixVisiteurModif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FModifierOffert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\medicamentOffert\FModifierOffert.Designer.cs">
+      <DependentUpon>FModifierOffert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\SuppCompoChoixMedoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\SuppCompoChoixMedoc.Designer.cs">
+      <DependentUpon>SuppCompoChoixMedoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FajouterRapport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FajouterRapport.Designer.cs">
+      <DependentUpon>FajouterRapport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FChoixNomP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FChoixNomP.Designer.cs">
+      <DependentUpon>FChoixNomP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FChoixRVDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FChoixRVDate.Designer.cs">
+      <DependentUpon>FChoixRVDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FListeRVDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FListeRVDate.Designer.cs">
+      <DependentUpon>FListeRVDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FListeRVNomP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\RapportVisite\FListeRVNomP.Designer.cs">
+      <DependentUpon>FListeRVNomP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentation\FAffichageCompo.resx">
       <DependentUpon>FAffichageCompo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\FAfficheCompo.resx">
+      <DependentUpon>FAfficheCompo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\FAjoutComposant.resx">
       <DependentUpon>FAjoutComposant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\FChoixFamille.resx">
       <DependentUpon>FChoixFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\FCompoModif.resx">
+      <DependentUpon>FCompoModif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\FListeMédicaments.resx">
       <DependentUpon>FListeMédicaments.cs</DependentUpon>
@@ -110,6 +194,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\FModifCompo.resx">
       <DependentUpon>FModifCompo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\FSuppCompo.resx">
+      <DependentUpon>FSuppCompo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\medicamentOffert\FchoixMedicamentModif.resx">
+      <DependentUpon>FchoixMedicamentModif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\medicamentOffert\FChoixRapportModif.resx">
+      <DependentUpon>FChoixRapportModif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\medicamentOffert\FChoixVisiteurModif.resx">
+      <DependentUpon>FChoixVisiteurModif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\medicamentOffert\FModifierOffert.resx">
+      <DependentUpon>FModifierOffert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\SuppCompoChoixMedoc.resx">
+      <DependentUpon>SuppCompoChoixMedoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\RapportVisite\FajouterRapport.resx">
+      <DependentUpon>FajouterRapport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\RapportVisite\FChoixNomP.resx">
+      <DependentUpon>FChoixNomP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\RapportVisite\FChoixRVDate.resx">
+      <DependentUpon>FChoixRVDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\RapportVisite\FListeRVDate.resx">
+      <DependentUpon>FListeRVDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\RapportVisite\FListeRVNomP.resx">
+      <DependentUpon>FListeRVNomP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

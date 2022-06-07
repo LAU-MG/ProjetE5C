@@ -21,6 +21,7 @@ namespace ProjetE5C
         {
             deconnexionToolStripMenuItem.Enabled = false;
             médicamentsToolStripMenuItem.Enabled = false;
+            rapportsToolStripMenuItem.Enabled = false;
             connexionToolStripMenuItem.Enabled = true;
         }
 
@@ -100,6 +101,7 @@ namespace ProjetE5C
                                 lb_etat.Text = "Etat connecté";
                                 deconnexionToolStripMenuItem.Enabled = true;
                                 médicamentsToolStripMenuItem.Enabled = true;
+                                rapportsToolStripMenuItem.Enabled = true;
                                 connexionToolStripMenuItem.Enabled = false;
                             }
                             else
@@ -178,16 +180,42 @@ namespace ProjetE5C
 
         private void modifierCompoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            List<composant> mesC = ServiceMédicamentscs.getInstance().ListeDesCompo();
+            Presentation.FAffichageCompo fAffichageCompo = new Presentation.FAffichageCompo(mesC);
+            fAffichageCompo.ShowDialog(); ;
+
+
+
+        }
+
+        private void rapportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ajoutRapportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void ajoutRapportToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
             try
             {
-                medicament unMed = new medicament();
+                rapport_visite unRapV = new rapport_visite();
+                List<praticien> unPraticien = ServicePraticien.getInstance().listePraticien();
+                List<visiteur> unVisiteur = ServiceVisiteur.getInstance().GetListeVisiteur();
 
-                List<medicament> mesMeds = ServiceMédicamentscs.getInstance().ListedesMeds();
-                Presentation.FModifCompo mc = new Presentation.FModifCompo(mesMeds);
-                mc.ShowDialog();
-               
+                Presentation.RapportVisite.FajouterRapport r = new Presentation.RapportVisite.FajouterRapport(unPraticien, unVisiteur, unRapV);
+                r.ShowDialog();
 
-              
+                ServiceRapport.getInstance().ajoutunRapport(unRapV);
+                ServiceRapport.getInstance().MiseAjourDuModele();
+                ServicePraticien.getInstance().MiseAjourDuModele();
+                ServiceVisiteur.getInstance().MiseAjourDuModele();
+                MessageBox.Show("Votre ", "Ajouter un Composant", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             catch (MonException er)
@@ -195,8 +223,53 @@ namespace ProjetE5C
                 MessageBox.Show(er.Message, "Ajout", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            
+        }
 
+        private void rapportVisiteNomPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<praticien> listePraticien = ServicePraticien.getInstance().listePraticien();
+
+                Presentation.RapportVisite.FChoixNomP p = new Presentation.RapportVisite.FChoixNomP(listePraticien);
+                p.ShowDialog();
+
+            }
+            catch (MonException er)
+            {
+                MessageBox.Show(er.Message, " La liste des médicaments par famille", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void rapportVisiteDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<rapport_visite> DateRapport = ServiceRapport.getInstance().DateRapport();
+
+                Presentation.RapportVisite.FChoixRVDate p = new Presentation.RapportVisite.FChoixRVDate(DateRapport);
+                p.ShowDialog();
+
+            }
+            catch (MonException er)
+            {
+                MessageBox.Show(er.Message, " La liste des médicaments par famille", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void supprimerUnComposantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<medicament> mesM = ServiceMédicamentscs.getInstance().ListeDesMedicament();
+            Presentation.SuppCompoChoixMedoc maSupp = new Presentation.SuppCompoChoixMedoc(mesM);
+            maSupp.ShowDialog();
+
+        }
+
+        private void modificationEtSuppressionDunMédicamentOffertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<visiteur> mesVisisteurs = ServiceVisiteur.getInstance().GetListeVisiteur();
+            Presentation.medicamentOffert.FChoixVisiteurModif choixVisiteur = new Presentation.medicamentOffert.FChoixVisiteurModif(mesVisisteurs);
+            choixVisiteur.ShowDialog();
         }
     }
 }

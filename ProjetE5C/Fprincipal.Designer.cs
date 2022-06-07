@@ -37,8 +37,14 @@
             this.médicamentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lb_etat = new System.Windows.Forms.Label();
             this.modifierCompoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rapportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajoutRapportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rapportVisiteNomPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rapportVisiteDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lb_etat = new System.Windows.Forms.Label();
+            this.supprimerUnComposantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificationEtSuppressionDunMédicamentOffertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +52,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fichierToolStripMenuItem,
-            this.médicamentsToolStripMenuItem});
+            this.médicamentsToolStripMenuItem,
+            this.rapportsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 29);
@@ -98,7 +105,8 @@
             this.médicamentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listerToolStripMenuItem,
             this.ajoutToolStripMenuItem,
-            this.modifierCompoToolStripMenuItem});
+            this.modifierCompoToolStripMenuItem,
+            this.supprimerUnComposantToolStripMenuItem});
             this.médicamentsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.médicamentsToolStripMenuItem.Name = "médicamentsToolStripMenuItem";
             this.médicamentsToolStripMenuItem.Size = new System.Drawing.Size(115, 25);
@@ -107,16 +115,57 @@
             // listerToolStripMenuItem
             // 
             this.listerToolStripMenuItem.Name = "listerToolStripMenuItem";
-            this.listerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.listerToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
             this.listerToolStripMenuItem.Text = "ListerMedicamentFam";
             this.listerToolStripMenuItem.Click += new System.EventHandler(this.listerToolStripMenuItem_Click);
             // 
             // ajoutToolStripMenuItem
             // 
             this.ajoutToolStripMenuItem.Name = "ajoutToolStripMenuItem";
-            this.ajoutToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.ajoutToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
             this.ajoutToolStripMenuItem.Text = "Ajout";
             this.ajoutToolStripMenuItem.Click += new System.EventHandler(this.ajoutToolStripMenuItem_Click);
+            // 
+            // modifierCompoToolStripMenuItem
+            // 
+            this.modifierCompoToolStripMenuItem.Name = "modifierCompoToolStripMenuItem";
+            this.modifierCompoToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
+            this.modifierCompoToolStripMenuItem.Text = "ModifierCompo";
+            this.modifierCompoToolStripMenuItem.Click += new System.EventHandler(this.modifierCompoToolStripMenuItem_Click);
+            // 
+            // rapportsToolStripMenuItem
+            // 
+            this.rapportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ajoutRapportToolStripMenuItem,
+            this.rapportVisiteNomPToolStripMenuItem,
+            this.rapportVisiteDateToolStripMenuItem,
+            this.modificationEtSuppressionDunMédicamentOffertToolStripMenuItem});
+            this.rapportsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.rapportsToolStripMenuItem.Name = "rapportsToolStripMenuItem";
+            this.rapportsToolStripMenuItem.Size = new System.Drawing.Size(85, 25);
+            this.rapportsToolStripMenuItem.Text = "Rapports";
+            this.rapportsToolStripMenuItem.Click += new System.EventHandler(this.rapportsToolStripMenuItem_Click);
+            // 
+            // ajoutRapportToolStripMenuItem
+            // 
+            this.ajoutRapportToolStripMenuItem.Name = "ajoutRapportToolStripMenuItem";
+            this.ajoutRapportToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.ajoutRapportToolStripMenuItem.Text = "AjoutRapport";
+            this.ajoutRapportToolStripMenuItem.Click += new System.EventHandler(this.ajoutRapportToolStripMenuItem_Click_1);
+            // 
+            // rapportVisiteNomPToolStripMenuItem
+            // 
+            this.rapportVisiteNomPToolStripMenuItem.Name = "rapportVisiteNomPToolStripMenuItem";
+            this.rapportVisiteNomPToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.rapportVisiteNomPToolStripMenuItem.Text = "RapportVisiteNomP";
+            this.rapportVisiteNomPToolStripMenuItem.Click += new System.EventHandler(this.rapportVisiteNomPToolStripMenuItem_Click);
+            // 
+            // rapportVisiteDateToolStripMenuItem
+            // 
+            this.rapportVisiteDateToolStripMenuItem.Name = "rapportVisiteDateToolStripMenuItem";
+            this.rapportVisiteDateToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.rapportVisiteDateToolStripMenuItem.Text = "RapportVisiteDate";
+            this.rapportVisiteDateToolStripMenuItem.Click += new System.EventHandler(this.rapportVisiteDateToolStripMenuItem_Click);
             // 
             // lb_etat
             // 
@@ -129,12 +178,19 @@
             this.lb_etat.TabIndex = 1;
             this.lb_etat.Text = "Non connecter";
             // 
-            // modifierCompoToolStripMenuItem
+            // supprimerUnComposantToolStripMenuItem
             // 
-            this.modifierCompoToolStripMenuItem.Name = "modifierCompoToolStripMenuItem";
-            this.modifierCompoToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.modifierCompoToolStripMenuItem.Text = "ModifierCompo";
-            this.modifierCompoToolStripMenuItem.Click += new System.EventHandler(this.modifierCompoToolStripMenuItem_Click);
+            this.supprimerUnComposantToolStripMenuItem.Name = "supprimerUnComposantToolStripMenuItem";
+            this.supprimerUnComposantToolStripMenuItem.Size = new System.Drawing.Size(257, 26);
+            this.supprimerUnComposantToolStripMenuItem.Text = "Supprimer un composant";
+            this.supprimerUnComposantToolStripMenuItem.Click += new System.EventHandler(this.supprimerUnComposantToolStripMenuItem_Click);
+            // 
+            // modificationEtSuppressionDunMédicamentOffertToolStripMenuItem
+            // 
+            this.modificationEtSuppressionDunMédicamentOffertToolStripMenuItem.Name = "modificationEtSuppressionDunMédicamentOffertToolStripMenuItem";
+            this.modificationEtSuppressionDunMédicamentOffertToolStripMenuItem.Size = new System.Drawing.Size(439, 26);
+            this.modificationEtSuppressionDunMédicamentOffertToolStripMenuItem.Text = "Modification et suppression d\'un médicament offert";
+            this.modificationEtSuppressionDunMédicamentOffertToolStripMenuItem.Click += new System.EventHandler(this.modificationEtSuppressionDunMédicamentOffertToolStripMenuItem_Click);
             // 
             // Fprincipal
             // 
@@ -167,6 +223,12 @@
         private System.Windows.Forms.ToolStripMenuItem listerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ajoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modifierCompoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rapportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ajoutRapportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rapportVisiteNomPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rapportVisiteDateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supprimerUnComposantToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificationEtSuppressionDunMédicamentOffertToolStripMenuItem;
     }
 }
 

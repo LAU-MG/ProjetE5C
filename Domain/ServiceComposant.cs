@@ -75,16 +75,40 @@ namespace Domain
 
         }
 
-        public composant UnComposant(id_composant)
+        public List<composant> UnComposant(int id_compo)
         {
+            sErreurs er = new sErreurs("Erreur  sur la mise à jour du modèle", "MiseAjourDuModele()");
+
+
             try
             {
-              
-              var C = from m in unService.composant
-                             where m.id_composant 
-                             select m);
+
+                var C = (from m in unService.composant
+                        where m.id_composant == id_compo
+                         select m);
                
-                return C ;
+                return C.ToList<composant>();
+            }
+
+            catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+        }
+
+        public composant UnCompo(int id_compo)
+        {
+            sErreurs er = new sErreurs("Erreur  sur la mise à jour du modèle", "MiseAjourDuModele()");
+
+
+            try
+            {
+
+                var C = (from m in unService.composant
+                         where m.id_composant == id_compo
+                         select m).First();
+
+                return C;
             }
 
             catch (Exception e)
